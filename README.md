@@ -9,6 +9,6 @@
    ```bash
    npm install
 
-2. 3. Execute o projeto:
+3. Execute o projeto:
    ```bash
    npm start
