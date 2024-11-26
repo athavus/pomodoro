@@ -8,7 +8,7 @@
 2. Instale as dependências:
    ```bash
    npm install
-   
-2. Execute o projeto:
-  ```bash
+
+2. 3. Execute o projeto:
+   ```bash
    npm start
