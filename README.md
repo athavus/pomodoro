@@ -4,11 +4,11 @@
    ```bash
    git clone https://github.com/athavus/seu-repositorio.git
    cd seu-repositorio
-   
+
 2. Instale as dependências:
-  ```bash
+   ```bash
    npm install
    
-3. Execute o projeto:
+2. Execute o projeto:
   ```bash
    npm start
