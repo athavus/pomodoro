@@ -8,7 +8,6 @@ class PomodoroTimer {
 		this.isPaused = true;
 
 		this.timerDisplay = document.getElementById("timer-section");
-		this.statusDisplay = document.getElementById("status");
 		this.startBtn = document.getElementById("startBtn");
 		this.pauseBtn = document.getElementById("pauseBtn");
 		this.resetBtn = document.getElementById("resetBtn");
@@ -49,33 +48,26 @@ class PomodoroTimer {
 	}
 
 	loadThemePreference() {
-		const savedTheme = localStorage.getItem("pomodoroTheme");
-		if (savedTheme === "dark") {
-			document.body.classList.add("dark-theme");
-			this.iconTheme.setAttribute("src", "assets/light-mode.png");
-			this.editPen.setAttribute("src", "assets/light-pen.png");
-		} else if (savedTheme === 'light') {
-			this.iconTheme.setAttribute("src", "assets/dark-mode.png");
-			this.editPen.setAttribute("src", "assets/dark-pen.png");
-		}
-	}
+    const savedTheme = localStorage.getItem("pomodoroTheme");
+    if (savedTheme) {
+        document.body.classList.toggle("dark-theme", savedTheme === "dark");
+        
+				for(const element of document.querySelectorAll('[data-dark][data-light]')) {
+					element.src = element.getAttribute(`data-${savedTheme}`);
+				}
+    }
+}
 
 	toggleTheme() {
-		document.body.classList.toggle("dark-theme");
-		const theme = document.body.classList.contains("dark-theme")
-			? "dark"
-			: "light";
-		
-		if (theme === "dark") {
-			this.iconTheme.setAttribute("src", "assets/light-mode.png");
-			this.editPen.setAttribute("src", "assets/light-pen.png");
-		} else if (theme === "light") {
-			this.iconTheme.setAttribute("src", "assets/dark-mode.png");
-			this.editPen.setAttribute("src", "assets/dark-pen.png");
+    document.body.classList.toggle("dark-theme");
+    const theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+    
+		for(const element of document.querySelectorAll('[data-dark][data-light]')) {
+			element.src = element.getAttribute(`data-${theme}`);
 		}
 
-		localStorage.setItem("pomodoroTheme", theme);
-	}
+    localStorage.setItem("pomodoroTheme", theme);
+}
 
 	setCustomTime() {
 		const customTime = Number.parseInt(this.timeInput.value);
@@ -108,7 +100,6 @@ class PomodoroTimer {
 		this.isWorking = true;
 		this.timeLeft = this.workTime;
 		this.timerDisplay.textContent = this.formatTime(this.timeLeft);
-		this.statusDisplay.textContent = "Tempo de trabalho";
 		this.startBtn.style.display = "inline-block";
 		this.pauseBtn.style.display = "none";
 		this.isPaused = true;
@@ -130,10 +121,8 @@ class PomodoroTimer {
 
 		if (this.isWorking) {
 			this.timeLeft = this.workTime;
-			this.statusDisplay.textContent = "Tempo de trabalho";
 		} else {
 			this.timeLeft = this.breakTime;
-			this.statusDisplay.textContent = "Tempo de descanso";
 		}
 
 		this.timerDisplay.textContent = this.formatTime(this.timeLeft);

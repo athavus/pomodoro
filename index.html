@@ -15,24 +15,34 @@
     <!-- BOTÃO PARA SELECIONAR O TEMA -->
     <div class="theme">
       <button id="themeToggle" class="theme-button" onclick="">
-        <img id="theme-icon" src="assets/dark-mode.png">
+        <img id="theme-icon" data-dark="assets/light-mode.png" data-light="assets/dark-mode.png" src="assets/light-mode.png">
       </button>
     </div>
+    <!-- TIMER DE FATO -->
     <div id="timer">
       <div id="timer-section">
         25:00
       </div>
+      <!-- EDIÇÃO DO TEMPO DO POMODORO -->
       <div id="edit-section">
         <button id="open-edit-section" class="edit-timer">
-          <img id="pen" src="assets/dark-pen.png" alt="">
+          <img id="pen" data-dark="assets/light-pen.png" data-light="assets/dark-pen.png" src="assets/light-pen.png">
         </button>
       </div>
     </div>
-    <div id="status">Tempo de trabalho</div>
+    <!-- BOTÕES DE INICIAR E RESETAR -->
     <div class="buttons">
-      <button id="startBtn">Iniciar</button>
-      <button id="pauseBtn" style="display:none;">Pausar</button>
-      <button id="resetBtn" class="reset">Resetar</button>
+      <button id="startBtn">
+        <img data-dark="assets/light-play.png" data-light="assets/dark-play.png" src="assets/dark-play.png">
+      </button>
+    
+      <button id="pauseBtn" style="display:none;">
+        <img data-dark="assets/light-pause.png" data-light="assets/dark-pause.png" src="assets/dark-pause.png">
+      </button>
+    
+      <button id="resetBtn" class="reset">
+        <img data-dark="assets/light-reset.png" data-light="assets/dark-reset.png" src="assets/dark-reset.png">
+      </button>
     </div>
 
     <div id="modal" class="modal">
