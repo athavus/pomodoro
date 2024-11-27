@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro - Athavus</title>
+  <link rel="stylesheet" href="src/pomodoro.css">
+  <link rel="shortcut icon" href="assets/icon.ico" type="image/x-icon">
+
+</head>
+
+<body>
+  <div class="container">
+    <!-- BOTÃO PARA SELECIONAR O TEMA -->
+    <div class="theme">
+      <button id="themeToggle" class="theme-button" onclick="">
+        <img id="theme-icon" src="assets/dark-mode.png">
+      </button>
+    </div>
+    <div id="timer">
+      <div id="timer-section">
+        25:00
+      </div>
+      <div id="edit-section">
+        <button id="open-edit-section" class="edit-timer">
+          <img id="pen" src="assets/dark-pen.png" alt="">
+        </button>
+      </div>
+    </div>
+    <div id="status">Tempo de trabalho</div>
+    <div class="buttons">
+      <button id="startBtn">Iniciar</button>
+      <button id="pauseBtn" style="display:none;">Pausar</button>
+      <button id="resetBtn" class="reset">Resetar</button>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div id="settings">
+          <input type="number" id="timeInput" value="25" min="1" max="60">
+          <button id="setTimeBtn">Definir Tempo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/pomodoro.js"></script>
+</body>
+
+</html>
