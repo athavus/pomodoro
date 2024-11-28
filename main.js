@@ -1,55 +1,92 @@
-const { app, BrowserWindow, Tray, Menu } = require('electron')
-const path = require('node:path')
-const fs = require('node:fs')
-
+const { app, BrowserWindow, Tray, Menu } = require('electron');
+const path = require('node:path');
+const fs = require('node:fs');
 const iconPath = path.join(__dirname, 'assets', 'icon.png');
 
-// Adicione uma verificação de existência do arquivo
 if (!fs.existsSync(iconPath)) {
   console.error('Arquivo de ícone não encontrado:', iconPath);
-  // Você pode definir um caminho alternativo ou usar um ícone padrão
 }
 
+let mainWindow;
+let tray;
+
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 320,
-    height: 260,
+    height: 265,
+    frame: false,
+    autoHideMenuBar: true,
+    resizable: false,
+    transparent: true,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false 
-    }
-  })
-  win.loadFile('index.html')
+      contextIsolation: false,
+    },
+  });
+  
+  mainWindow.loadFile('index.html');
+
+  mainWindow.on('blur', () => {
+    mainWindow.hide();
+  });
+
+  mainWindow.on('close', (event) => {
+    event.preventDefault();
+    mainWindow.hide();
+  });
 }
 
 function createTray() {
   try {
-    const tray = new Tray(iconPath)
+    tray = new Tray(iconPath);
+
     const contextMenu = Menu.buildFromTemplate([
-      { label: 'Abrir', click: createWindow },
-      { label: 'Sair', click: () => app.quit() }
-    ])
-    tray.setToolTip('Pomodoro - Athavus')
-    tray.setContextMenu(contextMenu)
-    return tray
+      {
+        label: 'Abrir',
+        click: () => {
+          if (!mainWindow) {
+            createWindow();
+          } else {
+            mainWindow.show();
+          }
+        },
+      },
+      {
+        label: 'Sair',
+        click: () => {
+          app.quit();
+        },
+      },
+    ]);
+
+    tray.setToolTip('Pomodoro - Athavus');
+    tray.setContextMenu(contextMenu);
+
+    tray.on('click', () => {
+      if (mainWindow && !mainWindow.isVisible()) {
+        mainWindow.show();
+      } else {
+        mainWindow.hide();
+      }
+    });
   } catch (error) {
     console.error('Erro ao criar bandeja:', error);
   }
 }
 
 app.whenReady().then(() => {
-  createTray()
-  createWindow()
-  
+  createTray();
+  createWindow();
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+      createWindow();
     }
-  })
-})
+  });
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
