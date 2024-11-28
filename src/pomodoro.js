@@ -1,6 +1,6 @@
 class PomodoroTimer {
 	constructor() {
-		this.workTime = 25 * 60;
+		this.workTime = this.loadWorkTime();
 		this.breakTime = 5 * 60;
 		this.timeLeft = this.workTime;
 		this.timerInterval = null;
@@ -24,6 +24,15 @@ class PomodoroTimer {
 		
 		this.bindEvents();
 		this.loadThemePreference();
+		
+		this.timerDisplay.textContent = this.formatTime(this.workTime);
+		
+		this.timeInput.value = Math.floor(this.workTime / 60);
+	}
+
+	loadWorkTime() {
+		const savedWorkTime = localStorage.getItem("pomodoroWorkTime");
+		return savedWorkTime ? Number(savedWorkTime) : 25 * 60;
 	}
 
 	bindEvents() {
@@ -48,31 +57,35 @@ class PomodoroTimer {
 	}
 
 	loadThemePreference() {
-    const savedTheme = localStorage.getItem("pomodoroTheme");
-    if (savedTheme) {
-        document.body.classList.toggle("dark-theme", savedTheme === "dark");
-        
-				for(const element of document.querySelectorAll('[data-dark][data-light]')) {
-					element.src = element.getAttribute(`data-${savedTheme}`);
-				}
-    }
-}
+		const savedTheme = localStorage.getItem("pomodoroTheme");
+		if (savedTheme) {
+			document.body.classList.toggle("dark-theme", savedTheme === "dark");
+			
+			for(const element of document.querySelectorAll('[data-dark][data-light]')) {
+				element.src = element.getAttribute(`data-${savedTheme}`);
+			}
+		}
+	}
 
 	toggleTheme() {
-    document.body.classList.toggle("dark-theme");
-    const theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
-    
+		document.body.classList.toggle("dark-theme");
+		const theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+		
 		for(const element of document.querySelectorAll('[data-dark][data-light]')) {
 			element.src = element.getAttribute(`data-${theme}`);
 		}
 
-    localStorage.setItem("pomodoroTheme", theme);
-}
+		localStorage.setItem("pomodoroTheme", theme);
+	}
 
 	setCustomTime() {
 		const customTime = Number.parseInt(this.timeInput.value);
 		if (customTime > 0 && customTime <= 60) {
-			this.workTime = customTime * 60;
+			// Save work time to localStorage
+			const workTimeInSeconds = customTime * 60;
+			localStorage.setItem("pomodoroWorkTime", workTimeInSeconds);
+			
+			this.workTime = workTimeInSeconds;
 			this.timeLeft = this.workTime;
 			this.timerDisplay.textContent = this.formatTime(this.timeLeft);
 			this.closeModal();
@@ -110,7 +123,6 @@ class PomodoroTimer {
 			this.timeLeft--;
 			this.timerDisplay.textContent = this.formatTime(this.timeLeft);
 		} else {
-			this.playSound();
 			this.switchMode();
 		}
 	}

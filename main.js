@@ -1,31 +1,45 @@
-// main.js
 const { app, BrowserWindow, Tray, Menu } = require('electron')
 const path = require('node:path')
+const fs = require('node:fs')
 
-function createWindow () {
+const iconPath = path.join(__dirname, 'assets', 'icon.png');
+
+// Adicione uma verificação de existência do arquivo
+if (!fs.existsSync(iconPath)) {
+  console.error('Arquivo de ícone não encontrado:', iconPath);
+  // Você pode definir um caminho alternativo ou usar um ícone padrão
+}
+
+function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 320,
+    height: 260,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false 
     }
   })
-
-  win.loadFile('src/index.html')
+  win.loadFile('index.html')
 }
 
 function createTray() {
-  const tray = new Tray(path.join(__dirname, 'assets/icon.png'))
-  const contextMenu = Menu.buildFromTemplate([
-    { label: 'Abrir', click: createWindow },
-    { label: 'Sair', click: app.quit }
-  ])
-  tray.setToolTip('Pomodoro - Athavus')
-  tray.setContextMenu(contextMenu)
+  try {
+    const tray = new Tray(iconPath)
+    const contextMenu = Menu.buildFromTemplate([
+      { label: 'Abrir', click: createWindow },
+      { label: 'Sair', click: () => app.quit() }
+    ])
+    tray.setToolTip('Pomodoro - Athavus')
+    tray.setContextMenu(contextMenu)
+    return tray
+  } catch (error) {
+    console.error('Erro ao criar bandeja:', error);
+  }
 }
 
 app.whenReady().then(() => {
   createTray()
+  createWindow()
   
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
