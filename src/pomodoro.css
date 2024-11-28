@@ -103,7 +103,7 @@ button.theme-button {
 }
 
 button.theme-button img {
-  padding: 0px px;
+  padding: 0px 0px;
   width: 100%;
 }
 
@@ -140,10 +140,10 @@ button.edit-timer:hover {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: var(--bg-primary);
   padding: 20px;
   border-radius: 8px;
-  max-width: 400px;
+  max-width: 250px;
   width: 90%;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

@@ -14,7 +14,7 @@
     "productName": "Pomodoro",
     "win": {
       "target": [
-        "nsis",   
+        "nsis",
         "portable"
       ],
       "icon": "build/icon.png"
@@ -32,6 +32,9 @@
   },
   "dependencies": {
     "electron-builder": "^25.1.8",
-    "electron-updater": "^6.3.9"
+    "electron-updater": "^6.3.9",
+    "framer-motion": "^11.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

@@ -6,8 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pomodoro - Athavus</title>
   <link rel="stylesheet" href="src/pomodoro.css">
+  <!-- ÍCONE DA APLICAÇÃO -->
   <link rel="shortcut icon" href="assets/icon.ico" type="image/x-icon">
-
+  <!-- IMPORTAÇÃO DO REACT -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.js"></script>
 </head>
 
 <body>
@@ -49,7 +53,9 @@
       <div class="modal-content">
         <div id="settings">
           <input type="number" id="timeInput" value="25" min="1" max="60">
-          <button id="setTimeBtn">Definir Tempo</button>
+          <button id="setTimeBtn">
+            <img data-dark="assets/light-clock.png" data-light="assets/dark-clock.png" src="assets/dark-clock.png">
+          </button>
         </div>
       </div>
     </div>
