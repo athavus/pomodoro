@@ -14,19 +14,22 @@ class PomodoroTimer {
 		this.timeInput = document.getElementById("timeInput");
 		this.setTimeBtn = document.getElementById("setTimeBtn");
 		this.themeToggle = document.getElementById("themeToggle");
+		this.musicToggle = document.getElementById("musicToggle");
 
 		this.modal = document.getElementById("modal");
 		this.openEditSectionBtn = document.getElementById("open-edit-section");
-		this.closeModalBtn = document.getElementById("modal"); 
+		this.closeModalBtn = document.getElementById("modal");
 
 		this.iconTheme = document.getElementById("theme-icon");
+		this.iconMusic = document.getElementById("music-icon");
 		this.editPen = document.getElementById("pen");
-		
+
 		this.bindEvents();
 		this.loadThemePreference();
-		
+		this.loadMutedPreference();
+
 		this.timerDisplay.textContent = this.formatTime(this.workTime);
-		
+
 		this.timeInput.value = Math.floor(this.workTime / 60);
 	}
 
@@ -41,6 +44,7 @@ class PomodoroTimer {
 		this.resetBtn.addEventListener("click", () => this.resetTimer());
 		this.setTimeBtn.addEventListener("click", () => this.setCustomTime());
 		this.themeToggle.addEventListener("click", () => this.toggleTheme());
+		this.musicToggle.addEventListener("click", () => this.toggleMusic());
 
 		this.openEditSectionBtn.addEventListener("click", () => this.openModal());
 		this.closeModalBtn.addEventListener("click", (e) => {
@@ -49,19 +53,19 @@ class PomodoroTimer {
 	}
 
 	openModal() {
-		this.modal.style.display = "flex"; 
+		this.modal.style.display = "flex";
 	}
 
 	closeModal() {
-		this.modal.style.display = "none"; 
+		this.modal.style.display = "none";
 	}
 
 	loadThemePreference() {
 		const savedTheme = localStorage.getItem("pomodoroTheme");
 		if (savedTheme) {
 			document.body.classList.toggle("dark-theme", savedTheme === "dark");
-			
-			for(const element of document.querySelectorAll('[data-dark][data-light]')) {
+
+			for (const element of document.querySelectorAll('[data-dark][data-light]')) {
 				element.src = element.getAttribute(`data-${savedTheme}`);
 			}
 		}
@@ -70,12 +74,63 @@ class PomodoroTimer {
 	toggleTheme() {
 		document.body.classList.toggle("dark-theme");
 		const theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
-		
-		for(const element of document.querySelectorAll('[data-dark][data-light]')) {
+
+		for (const element of document.querySelectorAll('[data-dark][data-light]')) {
 			element.src = element.getAttribute(`data-${theme}`);
 		}
 
 		localStorage.setItem("pomodoroTheme", theme);
+	}
+
+	loadMutedPreference() {
+		const savedMuted = localStorage.getItem("pomodoroMuted");
+		let savedTheme = localStorage.getItem("pomodoroTheme");
+
+		const elementsToMuteOrPlay = document.querySelectorAll("video, audio")
+		
+		savedTheme = savedTheme === "dark"
+			? 'light'
+			: 'dark'
+
+		if (savedMuted) {
+			this.iconMusic.setAttribute("src", `assets/${savedTheme}-mute.png`);
+			for (const element of elementsToMuteOrPlay) {
+				element.mute = true;
+				element.pause();
+			}
+		} else {
+			this.iconMusic.setAttribute("src", `assets/${savedTheme}-music.png`);
+			for (const element of elementsToMuteOrPlay) {
+				element.mute = false;
+				element.play();
+			}
+		}
+	}
+
+	toggleMusic() {
+		const theme = document.body.classList.contains("dark-theme") ? "light" : "dark";
+		const elementsToMuteOrPlay = document.querySelectorAll("video, audio")
+		let muted;
+		
+		if (this.iconMusic.getAttribute("src") === `assets/${theme}-music.png`) {
+			this.iconMusic.setAttribute("src", `assets/${theme}-mute.png`);
+			muted = true;
+			
+			for (const element of elementsToMuteOrPlay) {
+				element.mute = true;
+				element.pause();
+			}
+		} else if (this.iconMusic.getAttribute("src") === `assets/${theme}-mute.png`) {
+			this.iconMusic.setAttribute("src", `assets/${theme}-music.png`);
+			muted = false;
+
+			for (const element of elementsToMuteOrPlay) {
+				element.mute = false;
+				element.play();
+			}
+		}
+
+		localStorage.setItem("pomodoroMuted", muted);
 	}
 
 	setCustomTime() {
@@ -83,7 +138,7 @@ class PomodoroTimer {
 		if (customTime > 0 && customTime <= 60) {
 			const workTimeInSeconds = customTime * 60;
 			localStorage.setItem("pomodoroWorkTime", workTimeInSeconds);
-			
+
 			this.workTime = workTimeInSeconds;
 			this.timeLeft = this.workTime;
 			this.timerDisplay.textContent = this.formatTime(this.timeLeft);
