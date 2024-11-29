@@ -16,7 +16,7 @@ function createWindow() {
 
   mainWindow = new BrowserWindow({
     width: 320,
-    height: 280,
+    height: 265,
     frame: false,
     autoHideMenuBar: true,
     resizable: false,
@@ -35,7 +35,7 @@ function createWindow() {
   : screenWidth.size.height - 50;
 
   mainWindow.setPosition(x, y);
-
+  
   mainWindow.loadFile('index.html');
 
   mainWindow.on('blur', () => {
