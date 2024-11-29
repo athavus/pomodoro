@@ -81,7 +81,6 @@ class PomodoroTimer {
 	setCustomTime() {
 		const customTime = Number.parseInt(this.timeInput.value);
 		if (customTime > 0 && customTime <= 60) {
-			// Save work time to localStorage
 			const workTimeInSeconds = customTime * 60;
 			localStorage.setItem("pomodoroWorkTime", workTimeInSeconds);
 			
@@ -89,6 +88,8 @@ class PomodoroTimer {
 			this.timeLeft = this.workTime;
 			this.timerDisplay.textContent = this.formatTime(this.timeLeft);
 			this.closeModal();
+		} else {
+			alert('o tempo máximo\npermitido é entre 1 e 60');
 		}
 	}
 

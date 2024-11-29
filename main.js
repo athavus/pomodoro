@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu } = require('electron');
+const { app, BrowserWindow, Tray, Menu, screen } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
 const iconPath = path.join(__dirname, 'assets', 'icon.png');
@@ -11,18 +11,30 @@ let mainWindow;
 let tray;
 
 function createWindow() {
+  const trayBounds = tray.getBounds();
+  const screenWidth = screen.getPrimaryDisplay();
+
   mainWindow = new BrowserWindow({
     width: 320,
     height: 265,
     frame: false,
     autoHideMenuBar: true,
     resizable: false,
+    movable: true,
     transparent: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
+
+  const x = screenWidth.size.width - 550
+
+  const y = trayBounds.y < 100 
+  ? screenWidth.size.height - (screenWidth.size.height - 50)
+  : screenWidth.size.height - 50;
+
+  mainWindow.setPosition(x, y);
   
   mainWindow.loadFile('index.html');
 
@@ -42,7 +54,7 @@ function createTray() {
 
     const contextMenu = Menu.buildFromTemplate([
       {
-        label: 'Abrir',
+        label: 'Show',
         click: () => {
           if (!mainWindow) {
             createWindow();
@@ -52,22 +64,18 @@ function createTray() {
         },
       },
       {
-        label: 'Sair',
+        label: 'Exit',
         click: () => {
           app.quit();
         },
       },
     ]);
 
-    tray.setToolTip('Pomodoro - Athavus');
+    tray.setToolTip('pomodoro');
     tray.setContextMenu(contextMenu);
 
     tray.on('click', () => {
-      if (mainWindow && !mainWindow.isVisible()) {
-        mainWindow.show();
-      } else {
-        mainWindow.hide();
-      }
+      mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
     });
   } catch (error) {
     console.error('Erro ao criar bandeja:', error);

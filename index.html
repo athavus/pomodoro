@@ -17,11 +17,24 @@
 <body>
   <div class="container">
     <!-- BOTÃO PARA SELECIONAR O TEMA -->
-    <div class="theme">
-      <button id="themeToggle" class="theme-button" onclick="">
-        <img id="theme-icon" data-dark="assets/light-mode.png" data-light="assets/dark-mode.png" src="assets/dark-mode.png">
-      </button>
-    </div>
+
+    <section id="config-section">
+      <div class="music">
+        <button id="musicToggle" class="music-button" onclick="">
+          <img id="music-icon" data-dark="assets/light-music.png" data-light="assets/dark-music.png" src="assets/dark-music.png">
+        </button>
+      </div>
+      <div class="theme">
+        <button id="themeToggle" class="theme-button" onclick="">
+          <img id="theme-icon" data-dark="assets/light-mode.png" data-light="assets/dark-mode.png" src="assets/dark-mode.png">
+        </button>
+      </div>
+      <div class="options">
+        <button id="optionsToggle" class="options-button" onclick="">
+          <img id="options-icon" data-dark="assets/light-options.png" data-light="assets/dark-options.png" src="assets/dark-options.png">
+        </button>
+      </div>
+    </section>
     <!-- TIMER DE FATO -->
     <div id="timer">
       <div id="timer-section"></div>
@@ -37,11 +50,11 @@
       <button id="startBtn">
         <img data-dark="assets/light-play.png" data-light="assets/dark-play.png" src="assets/dark-play.png">
       </button>
-    
+
       <button id="pauseBtn" style="display:none;">
         <img data-dark="assets/light-pause.png" data-light="assets/dark-pause.png" src="assets/dark-pause.png">
       </button>
-    
+
       <button id="resetBtn" class="reset">
         <img data-dark="assets/light-reset.png" data-light="assets/dark-reset.png" src="assets/dark-reset.png">
       </button>
