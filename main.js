@@ -13,7 +13,7 @@ let tray;
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 320,
-    height: 265,
+    height: 275,
     frame: false,
     autoHideMenuBar: true,
     resizable: false,
