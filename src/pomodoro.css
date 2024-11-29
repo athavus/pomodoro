@@ -58,14 +58,14 @@ body {
 
 button.music-button {
   background-color: transparent;
-  width: 96px;
+  width: 90px;
   border-radius: 8px;
 }
 
 button.music-button img {
   padding: 0px 0px;
   width: 33px;
-  height: 33px;
+  height: 28px;
 }
 
 button.options-button {
