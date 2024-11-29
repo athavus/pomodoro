@@ -51,6 +51,30 @@ body {
   align-items: center;
 }
 
+#config-section {
+  display: flex;
+}
+
+button.music-button {
+  background-color: transparent;
+  width: auto;
+  border-radius: 8px;
+}
+
+button.music-button img {
+  padding: 0px 0px;
+}
+
+button.options-button {
+  background-color: transparent;
+  width: auto;
+  border-radius: 8px;
+}
+
+button.options-button img {
+  padding: 0px 0px;
+}
+
 #edit-section {
   margin: 0 0 0 0;
   width: 15%;
@@ -89,10 +113,42 @@ button.reset {
   background-color: transparent;
 }
 
+#settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+#setTimeBtn {
+  padding: 8px 0px !important;
+}
+
+#setTimeBtn img {
+  margin-top: 4px;
+}
+
 #timeInput {
-  width: 70px;
-  padding: 5px;
+  text-align: center;
+  width: 35px;
+  background-color: var(--bg-secondary);
+  border: 0.2px solid #0000004e;
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 8px 4px;
+  font-size: 18px;
   margin-right: 10px;
+  outline: none;
 }
 
 #theme {
@@ -101,14 +157,12 @@ button.reset {
 
 button.theme-button {
   background-color: transparent;
-  padding: 3.5px 8px;
-  width: 18%;
+  width: auto;
   border-radius: 8px;
 }
 
 button.theme-button img {
   padding: 0px 0px;
-  width: 100%;
 }
 
 button.edit-timer {
@@ -144,7 +198,7 @@ button.edit-timer:hover {
 }
 
 .modal-content {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-secondary);
   padding: 20px;
   border-radius: 8px;
   max-width: 250px;
