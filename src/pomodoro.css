@@ -57,12 +57,14 @@ body {
 
 button.music-button {
   background-color: transparent;
-  width: auto;
+  width: 96px;
   border-radius: 8px;
 }
 
 button.music-button img {
   padding: 0px 0px;
+  width: 33px;
+  height: 33px;
 }
 
 button.options-button {
