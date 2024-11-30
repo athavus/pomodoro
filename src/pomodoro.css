@@ -190,7 +190,7 @@ button.edit-timer:hover {
   transition: 0.5s ease-in-out;
 }
 
-.modal {
+.edit-timer-modal, .options-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -203,7 +203,7 @@ button.edit-timer:hover {
   z-index: 1000;
 }
 
-.modal-content {
+.edit-timer-modal-content, .options-modal-content {
   background-color: var(--bg-secondary);
   padding: 20px;
   border-radius: 8px;
@@ -224,7 +224,7 @@ button.edit-timer:hover {
   cursor: pointer;
 }
 
-.modal.show {
+.edit-timer-modal.show, .options-modal.show {
   display: flex; 
   animation: fadeIn 0.3s ease-in-out;
 }  

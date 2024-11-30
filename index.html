@@ -29,7 +29,7 @@
         </button>
       </div>
       <div class="options">
-        <button id="optionsToggle" class="options-button" onclick="">
+        <button id="open-options-section" class="options-button" onclick="">
           <img id="options-icon" data-dark="assets/light-options.png" data-light="assets/dark-options.png" src="assets/dark-options.png">
         </button>
       </div>
@@ -59,10 +59,26 @@
       </button>
     </div>
 
-    <div id="modal" class="modal">
-      <div class="modal-content">
+    <!-- MODAL PARA EDIÇÃO DE TEMPO -->
+    <div id="edit-timer-modal" class="edit-timer-modal">
+      <div class="edit-timer-modal-content">
         <h2 style="font-size: small; font-family: Jetbrains Mono;">
           DEFINA O NOVO TEMPO
+        </h2>
+        <div id="settings">
+          <input type="number" id="timeInput" value="25" min="1" max="60">
+          <button id="setTimeBtn">
+            <img data-dark="assets/light-clock.png" data-light="assets/dark-clock.png" src="assets/dark-clock.png">
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL PARA TELA DE CONFIGURAÇÕES -->
+    <div id="options-modal" class="options-modal">
+      <div class="options-modal-content">
+        <h2 style="font-size: small; font-family: Jetbrains Mono;">
+          TELA DE CONFIGURAÇÕES
         </h2>
         <div id="settings">
           <input type="number" id="timeInput" value="25" min="1" max="60">
