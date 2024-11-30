@@ -74,7 +74,7 @@ class PomodoroTimer {
 
 	toggleTheme() {
 		document.body.classList.toggle("dark-theme");
-		let theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+		const theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
 
 		for (const element of document.querySelectorAll('[data-dark][data-light]')) {
 			element.src = element.getAttribute(`data-${theme}`);

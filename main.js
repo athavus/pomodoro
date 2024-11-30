@@ -30,7 +30,7 @@ function createWindow() {
 
   const x = screenWidth.size.width - 550
 
-  const y = trayBounds.y < 100
+  const y = trayBounds.y < 0
   ? screenWidth.size.height - (screenWidth.size.height - 50)
   : screenWidth.size.height - 350;
 
