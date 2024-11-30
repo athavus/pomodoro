@@ -73,12 +73,18 @@ class PomodoroTimer {
 
 	toggleTheme() {
 		document.body.classList.toggle("dark-theme");
-		const theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+		let theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
 
 		for (const element of document.querySelectorAll('[data-dark][data-light]')) {
 			element.src = element.getAttribute(`data-${theme}`);
 		}
 
+		theme = theme === 'dark' ? 'light' : 'dark' 
+
+		this.iconMusic.src = localStorage.getItem('pomodoroMuted') === "true"
+		? `assets/${theme}-mute.png`
+		: `assets/${theme}-music.png`
+		
 		localStorage.setItem("pomodoroTheme", theme);
 	}
 
