@@ -134,11 +134,14 @@ input[type=number] {
 }
 
 #setTimeBtn {
+  display: flex;
   padding: 8px 0px !important;
+  justify-content: end;
 }
 
 #setTimeBtn img {
   margin-top: 4px;
+
 }
 
 #timeInput {
@@ -225,6 +228,8 @@ button.edit-timer:hover {
   display: flex; 
   animation: fadeIn 0.3s ease-in-out;
 }  
+
+
 
 @keyframes fadeIn {
   from {

@@ -26,7 +26,6 @@ class PomodoroTimer {
 
 		this.bindEvents();
 		this.loadThemePreference();
-		this.loadMutedPreference();
 
 		this.timerDisplay.textContent = this.formatTime(this.workTime);
 
@@ -69,6 +68,8 @@ class PomodoroTimer {
 				element.src = element.getAttribute(`data-${savedTheme}`);
 			}
 		}
+
+		this.loadMutedPreference();
 	}
 
 	toggleTheme() {
@@ -79,13 +80,9 @@ class PomodoroTimer {
 			element.src = element.getAttribute(`data-${theme}`);
 		}
 
-		theme = theme === 'dark' ? 'light' : 'dark' 
-
-		this.iconMusic.src = localStorage.getItem('pomodoroMuted') === "true"
-		? `assets/${theme}-mute.png`
-		: `assets/${theme}-music.png`
-		
 		localStorage.setItem("pomodoroTheme", theme);
+
+		this.loadMutedPreference();
 	}
 
 	loadMutedPreference() {
@@ -93,12 +90,12 @@ class PomodoroTimer {
 		let savedTheme = localStorage.getItem("pomodoroTheme");
 
 		const elementsToMuteOrPlay = document.querySelectorAll("video, audio")
-		
+
 		savedTheme = savedTheme === "dark"
 			? 'light'
 			: 'dark'
 
-		if (savedMuted) {
+		if (savedMuted === "true") {
 			this.iconMusic.setAttribute("src", `assets/${savedTheme}-mute.png`);
 			for (const element of elementsToMuteOrPlay) {
 				element.mute = true;
@@ -117,11 +114,11 @@ class PomodoroTimer {
 		const theme = document.body.classList.contains("dark-theme") ? "light" : "dark";
 		const elementsToMuteOrPlay = document.querySelectorAll("video, audio")
 		let muted;
-		
+
 		if (this.iconMusic.getAttribute("src") === `assets/${theme}-music.png`) {
 			this.iconMusic.setAttribute("src", `assets/${theme}-mute.png`);
 			muted = true;
-			
+
 			for (const element of elementsToMuteOrPlay) {
 				element.mute = true;
 				element.pause();

@@ -19,7 +19,7 @@ function createWindow() {
     height: 300,
     frame: false,
     autoHideMenuBar: true,
-    resizable: false,
+    resizable: true,
     movable: true,
     transparent: true,
     webPreferences: {
