@@ -1,3 +1,7 @@
+# Pomodoro | Electron JS
+---
+Projeto feito em Electron com Javascript vanilla para fazer alguns testes com electron, com tema claro e escuro, integração de música e as funcionalidades comuns do método pomodoro convencional. Segue abaixo uma configuração de como instalar o mesmo.
+
 ## Como configurar o projeto
 
 1. Clone este repositório de acordo com a branch pertencente ao seu sistema operacional:
