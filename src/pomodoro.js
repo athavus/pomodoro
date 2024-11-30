@@ -208,7 +208,7 @@ class PomodoroTimer {
 			this.workTime = workTimeInSeconds;
 			this.timeLeft = this.workTime;
 			this.timerDisplay.textContent = this.formatTime(this.timeLeft);
-			this.closeModal("edit-timer-modal");
+			this.modalManager.closeModal("edit-timer-modal");
 		} else {
 			alert("o tempo máximo\npermitido é entre 1 e 60");
 		}
