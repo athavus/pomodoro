@@ -1,11 +1,6 @@
 const { app, BrowserWindow, Tray, Menu, screen } = require('electron');
 const path = require('node:path');
-const fs = require('node:fs');
-const iconPath = path.join(__dirname, 'assets', 'icon.png');
-
-if (!fs.existsSync(iconPath)) {
-  console.error('Arquivo de ícone não encontrado:', iconPath);
-}
+const os = require('node:os');
 
 let mainWindow;
 let tray;
@@ -29,10 +24,19 @@ function createWindow() {
   });
 
   const x = screenWidth.size.width - 550
+  let y;
 
-  const y = trayBounds.y < 0
-  ? screenWidth.size.height - (screenWidth.size.height - 50)
-  : screenWidth.size.height - 350;
+  const os = detectOS();
+  
+  if (os === "Linux" || os === "macOS") {
+    y = trayBounds.y < 100
+    ? screenWidth.size.height - (screenWidth.size.height - 50)
+    : screenWidth.size.height - 350;
+  } else if (os === "Windows") {
+    y = trayBounds.y < 0
+    ? screenWidth.size.height - (screenWidth.size.height - 50)
+    : screenWidth.size.height - 350;
+  }
 
   mainWindow.setPosition(x, y);
   
@@ -48,9 +52,25 @@ function createWindow() {
   });
 }
 
+function detectOS() {
+  const plataforma = os.platform();
+
+  switch(plataforma) {
+    case 'win32':
+      return 'Windows';
+    case 'darwin':
+      return 'macOS';
+    case 'linux':
+      return 'Linux';
+    default:
+      return 'Sistema Operacional Desconhecido';
+  }
+}
+
+
 function createTray() {
   try {
-    tray = new Tray(iconPath);
+    tray = new Tray(path.join(__dirname, 'assets', 'icon.png'));
 
     const contextMenu = Menu.buildFromTemplate([
       {
