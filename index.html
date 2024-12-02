@@ -16,17 +16,20 @@
     <section id="config-section">
       <div class="music">
         <button id="musicToggle" class="music-button" onclick="">
-          <img id="music-icon" data-dark="assets/light-music.png" data-light="assets/dark-music.png" src="assets/dark-music.png">
+          <img id="music-icon" data-dark="assets/light-music.png" data-light="assets/dark-music.png"
+            src="assets/dark-music.png">
         </button>
       </div>
       <div class="theme">
         <button id="themeToggle" class="theme-button" onclick="">
-          <img id="theme-icon" data-dark="assets/light-mode.png" data-light="assets/dark-mode.png" src="assets/dark-mode.png">
+          <img id="theme-icon" data-dark="assets/light-mode.png" data-light="assets/dark-mode.png"
+            src="assets/dark-mode.png">
         </button>
       </div>
       <div class="options">
         <button id="open-options-section" class="options-button" onclick="">
-          <img id="options-icon" data-dark="assets/light-options.png" data-light="assets/dark-options.png" src="assets/dark-options.png">
+          <img id="options-icon" data-dark="assets/light-options.png" data-light="assets/dark-options.png"
+            src="assets/dark-options.png">
         </button>
       </div>
     </section>
@@ -77,10 +80,37 @@
           SETTINGS
         </h2>
         <div id="settings">
-          <input type="number" id="timeInput" value="25" min="1" max="60">
-          <button id="setTimeBtn">
-            <img data-dark="assets/light-clock.png" data-light="assets/dark-clock.png" src="assets/dark-clock.png">
-          </button>
+          <div class="audio-inputs">
+            <div class="audio-input-container">
+              <label for="pomodoro-audio">
+                <div class="pomodoro-label">
+                  Work Time 
+                </div>
+                <img data-dark="assets/light-music.png" data-light="assets/dark-music.png" src="assets/dark-music.png" width="10px" height="10px"
+                  alt="">
+              </label>
+              <input type="file" id="pomodoro-audio" accept="audio/*">
+              <div id="pomodoro-preview" class="audio-preview"></div>
+            </div>
+
+            <div class="audio-input-container">
+              <label for="break-audio">
+                <div class="pomodoro-label">
+                  Rest Time
+                </div>
+                <img data-dark="assets/light-music.png" data-light="assets/dark-music.png" src="assets/dark-music.png" width="10px" height="10px" alt="">
+              </label>
+              <input type="file" id="break-audio" accept="audio/*">
+              <div id="break-preview" class="audio-preview"></div>
+            </div>
+          </div>
+
+          <div class="audio-settings">
+            <label>
+              <input type="checkbox" id="loop-audio">
+              LOOP
+            </label>
+          </div>
         </div>
       </div>
     </div>

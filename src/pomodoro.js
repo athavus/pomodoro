@@ -1,3 +1,54 @@
+class AudioFileStorage {
+	constructor() {
+		this.storage = localStorage;
+	}
+
+	// Salva um arquivo de áudio como base64
+	saveAudioFile(fileKey, file) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+
+			reader.onload = (event) => {
+				try {
+					// Salva o arquivo como base64
+					const base64Audio = event.target.result;
+
+					// Salva informações do arquivo
+					const audioInfo = {
+						name: file.name,
+						type: file.type,
+						size: file.size,
+						base64: base64Audio
+					};
+
+					this.storage.setItem(fileKey, JSON.stringify(audioInfo));
+					resolve(audioInfo);
+				} catch (error) {
+					reject(error);
+				}
+			};
+
+			reader.onerror = (error) => {
+				reject(error);
+			};
+
+			// Lê o arquivo como base64
+			reader.readAsDataURL(file);
+		});
+	}
+
+	// Recupera um arquivo de áudio salvo
+	getAudioFile(fileKey) {
+		const storedAudio = this.storage.getItem(fileKey);
+		return storedAudio ? JSON.parse(storedAudio) : null;
+	}
+
+	// Remove um arquivo de áudio
+	removeAudioFile(fileKey) {
+		this.storage.removeItem(fileKey);
+	}
+}
+
 class ModalManager {
 	constructor() {
 		this.modals = {};

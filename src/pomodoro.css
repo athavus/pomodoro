@@ -121,6 +121,8 @@ button.reset {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: small;
 }
 
 input::-webkit-outer-spin-button,
@@ -206,6 +208,10 @@ button.edit-timer:hover {
   animation: fadeIn 0.3s ease-in-out;
 }
 
+.options-modal {
+  top: 2.5% !important;
+}
+
 .edit-timer-modal-content, .options-modal-content {
   background-color: var(--bg-secondary);
   padding: 20px;
@@ -215,6 +221,11 @@ button.edit-timer:hover {
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
+}
+
+.options-modal-content {
+  max-width: 350px !important;
+  height: 200px !important;
 }
 
 .close {
@@ -234,4 +245,18 @@ button.edit-timer:hover {
   to {
     opacity: 1;
   }
+}
+
+.audio-input-container {
+  margin-top: 5%;
+}
+
+.audio-settings {
+  display: flex;
+  transform: translateX(-35%);
+}
+
+.pomodoro-label {
+  display: flex;
+  margin-bottom: 4%;
 }
