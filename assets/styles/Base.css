@@ -1,0 +1,26 @@
+/*IMPORTAÇÃO DA FONTE DA JETBRAINS*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+  --bg-primary: #f0f0f0;
+  --bg-secondary: white;
+  --text-primary: #333;
+}
+
+.dark-theme {
+  --bg-primary: #1c1b1b;
+  --bg-secondary: #333;
+  --text-primary: #f0f0f0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: transparent;
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}

@@ -1,0 +1,40 @@
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+
+#timeInput {
+  text-align: center;
+  width: 35px;
+  background-color: var(--bg-secondary);
+  border: 0.2px solid #0000004e;
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 8px 4px;
+  font-size: 18px;
+  margin-right: 10px;
+  outline: none;
+}
+
+
+.audio-input-container {
+  margin-top: 5%;
+}
+
+.audio-settings {
+  display: flex;
+  transform: translateX(-35%);
+}
+
+.pomodoro-label {
+  display: flex;
+  margin-bottom: 4%;
+}

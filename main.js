@@ -70,7 +70,7 @@ function detectOS() {
 
 function createTray() {
   try {
-    tray = new Tray(path.join(__dirname, 'assets', 'icon.png'));
+    tray = new Tray(path.join(__dirname, 'assets','images', 'icon.png'));
 
     const contextMenu = Menu.buildFromTemplate([
       {

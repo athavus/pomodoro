@@ -1,0 +1,51 @@
+.container {
+  text-align: center;
+  background-color: var(--bg-secondary);
+  padding: 30px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#timer {
+  font-size: 4rem;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#timer-section {
+  margin: 0 0 0 0;
+  width: 85%;
+  display: flex;
+  font-family: "JetBrains Mono", monospace;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  align-items: center;
+}
+
+#config-section {
+  display: flex;
+}
+
+#edit-section {
+  margin: 0 0 0 0;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+#settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: small;
+}
+
+
+#theme {
+  margin-bottom: 12px;
+}

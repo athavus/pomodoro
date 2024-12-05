@@ -5,9 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pomodoro</title>
-  <link rel="stylesheet" href="src/pomodoro.css">
+  <link rel="stylesheet" href="assets/styles/Base.css">
+  <link rel="stylesheet" href="assets/styles/Buttons.css">
+  <link rel="stylesheet" href="assets/styles/Inputs.css">
+  <link rel="stylesheet" href="assets/styles/Layout.css">
+  <link rel="stylesheet" href="assets/styles/Modals.css">
+  
   <!-- ÍCONE DA APLICAÇÃO -->
-  <link rel="shortcut icon" href="assets/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/images/icon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -16,20 +21,20 @@
     <section id="config-section">
       <div class="music">
         <button id="musicToggle" class="music-button" onclick="">
-          <img id="music-icon" data-dark="assets/light-music.png" data-light="assets/dark-music.png"
-            src="assets/dark-music.png">
+          <img id="music-icon" data-dark="assets/images/light-music.png" data-light="assets/images/dark-music.png"
+            src="assets/images/dark-music.png">
         </button>
       </div>
       <div class="theme">
         <button id="themeToggle" class="theme-button" onclick="">
-          <img id="theme-icon" data-dark="assets/light-mode.png" data-light="assets/dark-mode.png"
-            src="assets/dark-mode.png">
+          <img id="theme-icon" data-dark="assets/images/light-mode.png" data-light="assets/images/dark-mode.png"
+            src="assets/images/dark-mode.png">
         </button>
       </div>
       <div class="options">
         <button id="open-options-section" class="options-button" onclick="">
-          <img id="options-icon" data-dark="assets/light-options.png" data-light="assets/dark-options.png"
-            src="assets/dark-options.png">
+          <img id="options-icon" data-dark="assets/images/light-options.png" data-light="assets/images/dark-options.png"
+            src="assets/images/dark-options.png">
         </button>
       </div>
     </section>
@@ -39,22 +44,22 @@
       <!-- EDIÇÃO DO TEMPO DO POMODORO -->
       <div id="edit-section">
         <button id="open-edit-section" class="edit-timer">
-          <img id="pen" data-dark="assets/light-pen.png" data-light="assets/dark-pen.png" src="assets/dark-pen.png">
+          <img id="pen" data-dark="assets/images/light-pen.png" data-light="assets/images/dark-pen.png" src="assets/images/dark-pen.png">
         </button>
       </div>
     </div>
     <!-- BOTÕES DE INICIAR E RESETAR -->
     <div class="buttons">
       <button id="startBtn">
-        <img data-dark="assets/light-play.png" data-light="assets/dark-play.png" src="assets/dark-play.png">
+        <img data-dark="assets/images/light-play.png" data-light="assets/images/dark-play.png" src="assets/images/dark-play.png">
       </button>
 
       <button id="pauseBtn" style="display:none;">
-        <img data-dark="assets/light-pause.png" data-light="assets/dark-pause.png" src="assets/dark-pause.png">
+        <img data-dark="assets/images/light-pause.png" data-light="assets/images/dark-pause.png" src="assets/images/dark-pause.png">
       </button>
 
       <button id="resetBtn" class="reset">
-        <img data-dark="assets/light-reset.png" data-light="assets/dark-reset.png" src="assets/dark-reset.png">
+        <img data-dark="assets/images/light-reset.png" data-light="assets/images/dark-reset.png" src="assets/images/dark-reset.png">
       </button>
     </div>
 
@@ -67,7 +72,7 @@
         <div id="settings">
           <input type="number" id="timeInput" value="25" min="1" max="60">
           <button id="setTimeBtn">
-            <img data-dark="assets/light-clock.png" data-light="assets/dark-clock.png" src="assets/dark-clock.png">
+            <img data-dark="assets/images/light-clock.png" data-light="assets/images/dark-clock.png" src="assets/images/dark-clock.png">
           </button>
         </div>
       </div>
@@ -84,7 +89,7 @@
             <div class="audio-input-container">
               <label for="pomodoro-audio">
                 <div class="pomodoro-label">
-                  Work Time <img data-dark="assets/light-music.png" data-light="assets/dark-music.png" src="assets/dark-music.png" style="margin-left: 8px; margin-top: 2px;" width="13px" height="13px" alt="">
+                  Work Time <img data-dark="assets/images/light-music.png" data-light="assets/images/dark-music.png" src="assets/images/dark-music.png" style="margin-left: 8px; margin-top: 2px;" width="13px" height="13px" alt="">
                 </div>
               </label>
               <input type="file" id="pomodoro-audio" accept="audio/*">
@@ -94,7 +99,7 @@
             <div class="audio-input-container">
               <label for="break-audio">
                 <div class="pomodoro-label">
-                  Rest Time <img data-dark="assets/light-music.png" data-light="assets/dark-music.png" src="assets/dark-music.png" style="margin-left: 8px; margin-top: 2px;" width="13px" height="13px" alt="">
+                  Rest Time <img data-dark="assets/images/light-music.png" data-light="assets/images/dark-music.png" src="assets/images/dark-music.png" style="margin-left: 8px; margin-top: 2px;" width="13px" height="13px" alt="">
                 </div>
               </label>
               <input type="file" id="break-audio" accept="audio/*">
@@ -113,7 +118,7 @@
     </div>
   </div>
 
-  <script src="src/pomodoro.js" type="module"></script>
+  <script src="src/PomodoroTimer.js" type="module"></script>
 </body>
 
 </html>

@@ -1,112 +1,7 @@
-class AudioFileStorage {
-	constructor() {
-		this.storage = localStorage;
-	}
+import { ModalManager } from './ModalManager.js';
+import { AudioFileStorage } from './AudioFileStorage.js';
 
-	// Salva um arquivo de áudio como base64
-	saveAudioFile(fileKey, file) {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-
-			reader.onload = (event) => {
-				try {
-					// Salva o arquivo como base64
-					const base64Audio = event.target.result;
-
-					// Salva informações do arquivo
-					const audioInfo = {
-						name: file.name,
-						type: file.type,
-						size: file.size,
-						base64: base64Audio
-					};
-
-					this.storage.setItem(fileKey, JSON.stringify(audioInfo));
-					resolve(audioInfo);
-				} catch (error) {
-					reject(error);
-				}
-			};
-
-			reader.onerror = (error) => {
-				reject(error);
-			};
-
-			// Lê o arquivo como base64
-			reader.readAsDataURL(file);
-		});
-	}
-
-	// Recupera um arquivo de áudio salvo
-	getAudioFile(fileKey) {
-		const storedAudio = this.storage.getItem(fileKey);
-		return storedAudio ? JSON.parse(storedAudio) : null;
-	}
-
-	// Remove um arquivo de áudio
-	removeAudioFile(fileKey) {
-		this.storage.removeItem(fileKey);
-	}
-}
-
-class ModalManager {
-	constructor() {
-		this.modals = {};
-	}
-
-	registerModal(modalId, openButtonId, closeButtonId) {
-		const modal = document.getElementById(modalId);
-		const openButton = document.getElementById(openButtonId);
-		const closeButton = document.getElementById(closeButtonId);
-
-		if (!modal || !openButton || !closeButton) {
-			console.error(`Erro ao registrar modal: ${modalId}`);
-			return null;
-		}
-
-		const modalObj = {
-			element: modal,
-			open: () => {
-				modal.style.display = "flex";
-			},
-			close: () => {
-				modal.style.display = "none";
-			},
-		};
-
-		openButton.addEventListener("click", modalObj.open);
-
-		closeButton.addEventListener("click", (e) => {
-			if (e.target === modal) {
-				modalObj.close();
-			}
-		});
-
-		this.modals[modalId] = modalObj;
-
-		return modalObj;
-	}
-
-	openModal(modalId) {
-		const modal = this.modals[modalId];
-		if (modal) {
-			modal.open();
-		} else {
-			console.error(`Modal não encontrado: ${modalId}`);
-		}
-	}
-
-	closeModal(modalId) {
-		const modal = this.modals[modalId];
-		if (modal) {
-			modal.close();
-		} else {
-			console.error(`Modal não encontrado: ${modalId}`);
-		}
-	}
-}
-
-class PomodoroTimer {
+export class PomodoroTimer {
 	constructor() {
 		this.workTime = this.loadWorkTime();
 		this.breakTime = 5 * 60;
@@ -131,6 +26,10 @@ class PomodoroTimer {
 
 		// Inicializar ModalManager
 		this.modalManager = new ModalManager();
+    // Inicializar AudioFileStorage
+    this.audioStorage = new AudioFileStorage();
+    this.pomodoroAudioInput = document.getElementById("pomodoro-audio");
+    this.breakAudioInput = document.getElementById("break-audio");
 
 		// Registrar modais usando ModalManager
 		this.modalManager.registerModal(
@@ -143,7 +42,8 @@ class PomodoroTimer {
 			"open-options-section",
 			"options-modal",
 		);
-
+    
+    this.loadSavedAudios();
 		this.bindEvents();
 		this.loadThemePreference();
 
@@ -163,6 +63,32 @@ class PomodoroTimer {
 		this.setTimeBtn.addEventListener("click", () => this.setCustomTime());
 		this.themeToggle.addEventListener("click", () => this.toggleTheme());
 		this.musicToggle.addEventListener("click", () => this.toggleMusic());
+
+    this.pomodoroAudioInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        this.audioStorage
+          .saveAudioFile("pomodoroAudio", file)
+          .then((audioInfo) => {
+            console.log("Pomodoro audio saved:", audioInfo);
+            this.updateAudioPreview("pomodoro-preview", audioInfo);
+          })
+          .catch(console.error);
+      }
+    });
+    
+    this.breakAudioInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        this.audioStorage
+          .saveAudioFile("breakAudio", file)
+          .then((audioInfo) => {
+            console.log("Break audio saved:", audioInfo);
+            this.updateAudioPreview("break-preview", audioInfo);
+          })
+          .catch(console.error);
+      }
+    });
 	}
 
 	loadThemePreference() {
@@ -206,13 +132,13 @@ class PomodoroTimer {
 		savedTheme = savedTheme === "dark" ? "light" : "dark";
 
 		if (savedMuted === "true") {
-			this.iconMusic.setAttribute("src", `assets/${savedTheme}-mute.png`);
+			this.iconMusic.setAttribute("src", `assets/images/${savedTheme}-mute.png`);
 			for (const element of elementsToMuteOrPlay) {
 				element.mute = true;
 				element.pause();
 			}
 		} else {
-			this.iconMusic.setAttribute("src", `assets/${savedTheme}-music.png`);
+			this.iconMusic.setAttribute("src", `assets/images/${savedTheme}-music.png`);
 			for (const element of elementsToMuteOrPlay) {
 				element.mute = false;
 				element.play();
@@ -227,8 +153,8 @@ class PomodoroTimer {
 		const elementsToMuteOrPlay = document.querySelectorAll("video, audio");
 		let muted;
 
-		if (this.iconMusic.getAttribute("src") === `assets/${theme}-music.png`) {
-			this.iconMusic.setAttribute("src", `assets/${theme}-mute.png`);
+		if (this.iconMusic.getAttribute("src") === `assets/images/${theme}-music.png`) {
+			this.iconMusic.setAttribute("src", `assets/images/${theme}-mute.png`);
 			muted = true;
 
 			for (const element of elementsToMuteOrPlay) {
@@ -236,9 +162,9 @@ class PomodoroTimer {
 				element.pause();
 			}
 		} else if (
-			this.iconMusic.getAttribute("src") === `assets/${theme}-mute.png`
+			this.iconMusic.getAttribute("src") === `assets/images/${theme}-mute.png`
 		) {
-			this.iconMusic.setAttribute("src", `assets/${theme}-music.png`);
+			this.iconMusic.setAttribute("src", `assets/images/${theme}-music.png`);
 			muted = false;
 
 			for (const element of elementsToMuteOrPlay) {
@@ -249,6 +175,27 @@ class PomodoroTimer {
 
 		localStorage.setItem("pomodoroMuted", muted);
 	}
+
+  updateAudioPreview(previewId, audioInfo) {
+    const previewElement = document.getElementById(previewId);
+    previewElement.innerHTML = `<audio controls>
+      <source src="${audioInfo.base64}" type="${audioInfo.type}">
+      Your browser does not support the audio tag.
+    </audio>`;
+  }
+
+  loadSavedAudios() {
+    const pomodoroAudio = this.audioStorage.getAudioFile("pomodoroAudio");
+    const breakAudio = this.audioStorage.getAudioFile("breakAudio");
+  
+    if (pomodoroAudio) {
+      this.updateAudioPreview("pomodoro-preview", pomodoroAudio);
+    }
+  
+    if (breakAudio) {
+      this.updateAudioPreview("break-preview", breakAudio);
+    }
+  }
 
 	setCustomTime() {
 		const customTime = Number.parseInt(this.timeInput.value);
@@ -323,4 +270,5 @@ class PomodoroTimer {
 	}
 }
 
+// Criando a instância do PomodoroTimer
 new PomodoroTimer();
