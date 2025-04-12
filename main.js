@@ -62,10 +62,8 @@ function detectOS() {
       return 'macOS';
     case 'linux':
       return 'Linux';
-    case 'android':
-      return 'Lollipop'
     default:
-      return 'Sistema Operacional Desconhecido, por favor, tente entrar em um sistema que esteja disponível o programa.';
+      return 'Sistema Operacional Desconhecido';
   }
 }
 
