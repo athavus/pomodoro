@@ -18,10 +18,8 @@ export class PomodoroTimer {
 		this.timeInput = document.getElementById("timeInput");
 		this.setTimeBtn = document.getElementById("setTimeBtn");
 		this.themeToggle = document.getElementById("themeToggle");
-		this.musicToggle = document.getElementById("musicToggle");
 
 		this.iconTheme = document.getElementById("theme-icon");
-		this.iconMusic = document.getElementById("music-icon");
 		this.editPen = document.getElementById("pen");
 
 		// Inicializar ModalManager
@@ -102,8 +100,6 @@ export class PomodoroTimer {
 				element.src = element.getAttribute(`data-${savedTheme}`);
 			}
 		}
-
-		this.loadMutedPreference();
 	}
 
 	toggleTheme() {

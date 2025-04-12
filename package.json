@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "electron-builder": "^25.1.8",
+    "electron-store": "^10.0.1",
     "electron-updater": "^6.3.9",
     "framer-motion": "^11.12.0",
     "react": "^18.3.1",
