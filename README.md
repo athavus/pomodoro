@@ -5,10 +5,13 @@ A ideia desse projeto de pomodoro é simplesmente ter um pomodoro que fica sempr
 
 Para rodar o projeto é simples, basta rodar os seguintes comandos
 
-('git clone https://github.com/athavus/pomodoro')
-
-('cd pomodoro')
-
-('npm install')
-
-('npm start')
+## Clone o Projeto
+```bash
+git clone https://github.com/athavus/pomodoro.git
+cd pomodoro
+```
+## Instale as dependências e rode o projeto
+```bash
+npm install
+npm start
+```
